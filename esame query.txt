@@ -1,0 +1,267 @@
+
+---------------------- CREAZIONE TABELLE ANAGRAFICA, TIPO VIOLAZIONE E VERBALE
+
+CREATE TABLE ANAGRAFICA (
+    idanagrafica INT PRIMARY KEY,
+    Cognome NVARCHAR(20),
+    Nome NVARCHAR(20),
+    Indirizzo NVARCHAR(50),
+    Città NVARCHAR(20),
+    CAP NVARCHAR(10),
+    Cod_Fisc NVARCHAR(16)
+);
+
+
+
+
+CREATE TABLE TIPO_VIOLAZIONE (
+    idviolazione INT PRIMARY KEY,
+    descrizione NVARCHAR(250)
+);
+
+
+
+
+CREATE TABLE VERBALE (
+    idverbale INT PRIMARY KEY,
+    DataViolazione DATE,
+    IndirizzoViolazione NVARCHAR(50),
+    Nominativo_Agente NVARCHAR(20),
+    DataTrascrizioneVerbale DATE,
+    Importo DECIMAL(10, 2),
+    DecurtamentoPunti INT,
+    idanagrafica INT,
+    idviolazione INT,
+    FOREIGN KEY (idanagrafica) REFERENCES ANAGRAFICA(idanagrafica),
+    FOREIGN KEY (idviolazione) REFERENCES TIPO_VIOLAZIONE(idviolazione)
+);
+
+
+
+----------------------------- RIEMPIMENTO TABELLE
+
+
+
+
+INSERT INTO ANAGRAFICA (idanagrafica, Cognome, Nome, Indirizzo, Città, CAP, Cod_Fisc)
+VALUES
+    (1, 'Rossi', 'Mario', 'Via Roma 123', 'Milano', '20100', 'ABCDEF01A'),
+    (2, 'Verdi', 'Anna', 'Via Verdi 45', 'Roma', '00100', 'XYZ12345B');
+    (3, 'Bianchi', 'Laura', 'Via Napoli 78', 'Napoli', '80100', 'LMNOPQ12C'),
+    (4, 'Ferrari', 'Luigi', 'Corso Venezia 32', 'Milano', '20121', 'RSTUVW34D'),
+    (5, 'Martini', 'Elena', 'Via Roma 56', 'Firenze', '50100', 'XY12345E');
+    (6, 'Russo', 'Giuseppe', 'Via Milano 14', 'Milano', '20100', 'FGHIJK67F'),
+    (7, 'Gallo', 'Maria', 'Via Torino 20', 'Roma', '00100', 'LMNOPQ89G'),
+    (8, 'Conti', 'Carlo', 'Corso Umberto 45', 'Napoli', '80100', 'RSTUVW01H'),
+    (9, 'Greco', 'Sofia', 'Via Venezia 8', 'Palermo', '90100', 'XYZ12345I'),
+    (10, 'Ferrara', 'Antonio', 'Via Firenze 30', 'Firenze', '50100', 'ABCDEF23L');
+    (11, 'Ferri', 'Marco', 'Via Roma 99', 'Roma', '00100', 'MNOPQR12M'),
+    (12, 'Bianco', 'Giulia', 'Via Milano 30', 'Milano', '20100', 'STUVWX34N'),
+    (13, 'Ricci', 'Paolo', 'Corso Venezia 12', 'Milano', '20121', 'YZ12345O'),
+    (14, 'Galli', 'Roberta', 'Via Firenze 8', 'Firenze', '50100', 'ABCDEF56P'),
+    (15, 'Esposito', 'Andrea', 'Via Napoli 18', 'Napoli', '80100', 'GHIJKL78Q');
+    (16, 'Marino', 'Giovanni', 'Via Palermo 25', 'Palermo', '90100', 'UVWXYZ12R'),
+    (17, 'Rizzo', 'Francesca', 'Via Milano 2', 'Palermo', '90100', 'XYZABCD34S'),
+    (18, 'Santoro', 'Lorenzo', 'Corso Vittorio Emanuele 15', 'Palermo', '90100', 'EFGHIJK56T'),
+    (19, 'Galli', 'Lucia', 'Via Napoli 60', 'Napoli', '80100', 'LMNOPQR78U'),
+    (20, 'Rinaldi', 'Antonella', 'Via Roma 10', 'Roma', '00100', 'STUVWXYZ90V'),
+    (21, 'Bruno', 'Giacomo', 'Corso Umberto 8', 'Napoli', '80100', 'ABCDE123F'),
+    (22, 'Fabbri', 'Federica', 'Via Firenze 40', 'Firenze', '50100', 'GHIJKL456H');
+    (23, 'Marino', 'Giovanni', 'Via Palermo 25', 'Palermo', '90100', 'UVWXYZ12R'),
+    (24, 'Rizzo', 'Francesca', 'Via Milano 2', 'Palermo', '90100', 'XYZABCD34S'),
+    (25, 'Santoro', 'Lorenzo', 'Corso Vittorio Emanuele 15', 'Palermo', '90100', 'EFGHIJK56T');
+
+
+
+
+
+INSERT INTO TIPO_VIOLAZIONE (idviolazione, descrizione)
+VALUES
+    (1, 'Eccesso di velocità'),
+    (2, 'Parcheggio in divieto di sosta');
+    (3, 'Guida in stato di ebbrezza'),
+    (4, 'Attraversamento pedonale vietato');
+    (5, 'Mancato uso del casco'),
+    (6, 'Sorpasso in curva'),
+    (7, 'Eccesso di velocità in autostrada'),
+    (8, 'Sosta in doppia fila'),
+    (9, 'Guida senza patente');
+    (10, 'Attraversamento con semaforo rosso'),
+    (11, 'Manca cintura di sicurezza'),
+    (12, 'Cellulare al volante'),
+    (13, 'Guida senza assicurazione'),
+    (14, 'Eccesso di velocità in zona residenziale');
+
+
+
+
+
+INSERT INTO VERBALE (idverbale, DataViolazione, IndirizzoViolazione, Nominativo_Agente, DataTrascrizioneVerbale, Importo, DecurtamentoPunti, idanagrafica, idviolazione)
+VALUES
+    (1, '2023-09-08', 'Via Garibaldi 56', 'Agente Smith', '2023-09-09', 100.00, 3, 1, 1),
+    (2, '2023-09-10', 'Piazza Duomo', 'Agente Johnson', '2023-09-11', 50.00, 2, 2, 2);
+    (3, '2023-09-12', 'Via Garibaldi 78', 'Agente Rossi', '2023-09-13', 150.00, 5, 3, 3),
+    (4, '2023-09-14', 'Piazza San Marco', 'Agente Ferrari', '2023-09-15', 75.00, 2, 4, 4),
+    (5, '2023-09-16', 'Via Firenze 10', 'Agente Martini', '2023-09-17', 60.00, 1, 5, 2),
+    (6, '2023-09-18', 'Piazza del Plebiscito', 'Agente Bianchi', '2023-09-19', 90.00, 2, 3, 1),
+    (7, '2023-09-20', 'Via Venezia 22', 'Agente Ferrari', '2023-09-21', 70.00, 2, 2, 2);
+    (8, '2023-09-22', 'Piazza del Popolo', 'Agente Russo', '2023-09-23', 80.00, 2, 6, 5),
+    (9, '2023-09-24', 'Via Napoli 12', 'Agente Gallo', '2023-09-25', 45.00, 1, 7, 4),
+    (10, '2023-09-26', 'Corso Vittorio Emanuele 5', 'Agente Conti', '2023-09-27', 100.00, 3, 8, 7),
+    (11, '2023-09-28', 'Via Palermo 34', 'Agente Greco', '2023-09-29', 70.00, 2, 9, 8),
+    (12, '2023-09-30', 'Via Firenze 5', 'Agente Ferrara', '2023-10-01', 60.00, 1, 10, 9);
+    (13, '2023-10-02', 'Piazza Garibaldi 22', 'Agente Ferri', '2023-10-03', 110.00, 3, 11, 10),
+    (14, '2023-10-04', 'Via Torino 14', 'Agente Bianco', '2023-10-05', 50.00, 2, 12, 11),
+    (15, '2023-10-06', 'Corso Vittorio Emanuele 78', 'Agente Ricci', '2023-10-07', 90.00, 2, 13, 12),
+    (16, '2023-10-08', 'Piazza della Repubblica 3', 'Agente Galli', '2023-10-09', 70.00, 2, 14, 13),
+    (17, '2023-10-10', 'Via Milano 5', 'Agente Esposito', '2023-10-11', 65.00, 2, 15, 14);
+    (18, '2023-10-12', 'Piazza Garibaldi 12', 'Agente Marino', '2023-10-13', 100.00, 3, 16, 15),
+    (19, '2023-10-14', 'Via Torino 8', 'Agente Rizzo', '2023-10-15', 70.00, 2, 17, 16),
+    (20, '2023-10-16', 'Corso Vittorio Emanuele 40', 'Agente Santoro', '2023-10-17', 420.00, 5, 18, 17),
+    (21, '2023-10-18', 'Piazza San Marco 5', 'Agente Galli', '2023-10-19', 150.00, 3, 19, 18),
+    (22, '2023-10-20', 'Via Napoli 40', 'Agente Rinaldi', '2023-10-21', 480.00, 5, 20, 15),
+    (23, '2023-10-22', 'Corso Umberto 20', 'Agente Bruno', '2023-10-23', 70.00, 2, 21, 16),
+    (24, '2023-10-24', 'Via Firenze 15', 'Agente Fabbri', '2023-10-25', 420.00, 5, 22, 17);
+    (25, '2023-10-12', 'Piazza Garibaldi 12', 'Agente Marino', '2023-10-13', 100.00, 3, 23, 1),
+    (26, '2023-10-14', 'Via Torino 8', 'Agente Rizzo', '2023-10-15', 70.00, 2, 24, 2),
+    (27, '2023-10-16', 'Corso Vittorio Emanuele 40', 'Agente Santoro', '2023-10-17', 420.00, 5, 25, 3),
+    (28, '2023-10-18', 'Piazza San Marco 5', 'Agente Galli', '2023-10-19', 150.00, 3, 23, 1),
+    (29, '2023-10-20', 'Via Napoli 40', 'Agente Rinaldi', '2023-10-21', 480.00, 5, 24, 2),
+    (30, '2023-10-22', 'Corso Umberto 20', 'Agente Bruno', '2023-10-23', 70.00, 2, 25, 3),
+    (31, '2023-10-24', 'Via Firenze 15', 'Agente Fabbri', '2023-10-25', 420.00, 5, 23, 1);
+
+
+
+
+
+------------------------------------- SVOLGIMENTO QUERY 
+
+
+
+
+Query 1:
+
+SELECT COUNT(*) AS VerbaliTrascritti FROM VERBALE
+
+Query 2: 
+
+SELECT idanagrafica, COUNT(*) AS VerbaliTrascrittiPerAnagrafe FROM VERBALE
+GROUP BY idanagrafica
+
+Query 3: 
+
+SELECT idviolazione, COUNT(*) AS VerbaliTrascrittiPerTipoViolazione FROM VERBALE
+GROUP BY idviolazione
+
+Query 4: 
+
+SELECT idanagrafica, SUM(DecurtamentoPunti) AS PuntiDecurtatiTotali FROM VERBALE
+GROUP BY idanagrafica
+
+Query 5: 
+
+SELECT Cognome, Nome, DataViolazione, IndirizzoViolazione, Importo, DecurtamentoPunti FROM ANAGRAFICA
+INNER JOIN VERBALE ON ANAGRAFICA.idanagrafica = VERBALE.idanagrafica
+WHERE Città = 'Palermo'
+
+Query 6: 
+
+SELECT Cognome, Nome, IndirizzoViolazione, DataViolazione, Importo, DecurtamentoPunti FROM ANAGRAFICA
+INNER JOIN VERBALE ON ANAGRAFICA.idanagrafica = VERBALE.idanagrafica
+WHERE DataViolazione BETWEEN '2009-02-01' AND '2009-07-31'
+
+
+Query 7: 
+
+SELECT idanagrafica, SUM(Importo) AS ImportoTotale FROM VERBALE
+GROUP BY idanagrafica
+
+Query 8: 
+
+SELECT * FROM ANAGRAFICA
+WHERE Città = 'Palermo'
+
+Query 9: 
+
+FATTA CON STORED PROCEDURE
+
+
+Query 10: 
+
+SELECT Nominativo_Agente, COUNT(*) AS ViolazioniContestate FROM VERBALE
+GROUP BY Nominativo_Agente
+
+
+Query 11:
+ 
+SELECT Cognome, Nome, IndirizzoViolazione, DataViolazione, Importo, DecurtamentoPunti FROM ANAGRAFICA
+INNER JOIN VERBALE ON ANAGRAFICA.idanagrafica = VERBALE.idanagrafica
+WHERE DecurtamentoPunti > 5
+
+Query 12:
+ 
+SELECT Cognome, Nome, IndirizzoViolazione, DataViolazione, Importo, DecurtamentoPunti FROM ANAGRAFICA
+INNER JOIN VERBALE ON ANAGRAFICA.idanagrafica = VERBALE.idanagrafica
+WHERE Importo > 400
+
+
+
+
+------------------------------------ SVOLGIMENTO STORED PROCEDURES
+
+SP 1:
+
+
+CREATE PROCEDURE VisualizzaContravvenzioniPerAnno
+    @Anno INT
+AS
+BEGIN
+    SELECT DataViolazione, IndirizzoViolazione, Importo, DecurtamentoPunti
+    FROM VERBALE
+    WHERE YEAR(DataViolazione) = @Anno
+END
+GO
+
+
+------------------------------------------
+
+SP 2:
+
+CREATE PROCEDURE VisualizzaTotalePuntiDecurtatiPerData
+    @Data DATE
+AS
+BEGIN
+    SELECT SUM(DecurtamentoPunti) AS TotalePuntiDecurtati
+    FROM VERBALE
+    WHERE DataViolazione = @Data
+END
+GO
+
+
+------------------------------------------
+
+SP 3: 
+
+CREATE PROCEDURE EliminaVerbalePerID
+    @IDVerbale INT
+AS
+BEGIN
+    DELETE FROM VERBALE
+    WHERE idverbale = @IDVerbale
+END
+GO
+
+
+------------------------------------------
+
+SP 4 (aka QUERY N° 9)
+
+CREATE PROCEDURE VisualizzaDettagliPerData
+    @Data DATE
+AS
+BEGIN
+    SELECT DataViolazione, Importo, DecurtamentoPunti
+    FROM VERBALE
+    WHERE DataViolazione = @Data
+END
+GO
