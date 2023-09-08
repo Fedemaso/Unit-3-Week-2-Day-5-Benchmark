@@ -3,12 +3,12 @@
 
 CREATE TABLE ANAGRAFICA (
     idanagrafica INT PRIMARY KEY,
-    Cognome NVARCHAR(20),
-    Nome NVARCHAR(20),
-    Indirizzo NVARCHAR(50),
-    Città NVARCHAR(20),
-    CAP NVARCHAR(10),
-    Cod_Fisc NVARCHAR(16)
+    Cognome NVARCHAR(20) NOT NULL,
+    Nome NVARCHAR(20) NOT NULL,
+    Indirizzo NVARCHAR(50) NOT NULL,
+    Città NVARCHAR(20) NOT NULL,
+    CAP NVARCHAR(10) NOT NULL,
+    Cod_Fisc NVARCHAR(16) NOT NULL
 );
 
 
@@ -16,7 +16,7 @@ CREATE TABLE ANAGRAFICA (
 
 CREATE TABLE TIPO_VIOLAZIONE (
     idviolazione INT PRIMARY KEY,
-    descrizione NVARCHAR(250)
+    descrizione NVARCHAR(250) NOT NULL
 );
 
 
@@ -24,14 +24,14 @@ CREATE TABLE TIPO_VIOLAZIONE (
 
 CREATE TABLE VERBALE (
     idverbale INT PRIMARY KEY,
-    DataViolazione DATE,
-    IndirizzoViolazione NVARCHAR(50),
-    Nominativo_Agente NVARCHAR(20),
-    DataTrascrizioneVerbale DATE,
-    Importo DECIMAL(10, 2),
-    DecurtamentoPunti INT,
-    idanagrafica INT,
-    idviolazione INT,
+    DataViolazione DATE NOT NULL,
+    IndirizzoViolazione NVARCHAR(50) NOT NULL,
+    Nominativo_Agente NVARCHAR(20) NOT NULL,
+    DataTrascrizioneVerbale DATE NOT NULL,
+    Importo DECIMAL(10, 2) NOT NULL,
+    DecurtamentoPunti INT NOT NULL,
+    idanagrafica INT NOT NULL,
+    idviolazione INT NOT NULL,
     FOREIGN KEY (idanagrafica) REFERENCES ANAGRAFICA(idanagrafica),
     FOREIGN KEY (idviolazione) REFERENCES TIPO_VIOLAZIONE(idviolazione)
 );
